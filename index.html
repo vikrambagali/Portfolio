@@ -68,7 +68,7 @@
    onmouseover="this.style.transform='scale(1.1)'"
    onmouseout="this.style.transform='scale(1)'"width="160px" src="public/imgs/vicky.png">
     Vikram</h1>
-    <a href="home.html" class="hover-circle">
+    <a href="pages/home.html" class="hover-circle">
     About
   </a>
   
@@ -89,8 +89,8 @@
 
       <!-- Buttons -->
       <div class="mt-4">
-        <a href="projects.html" class="btn btn-dark btn-lg me-3 shadow">🔗 View My Work</a>
-        <a href="home.html#contact" class="btn btn-outline-dark btn-lg shadow">📩 Contact Me</a>
+        <a href="pages/projects.html" class="btn btn-dark btn-lg me-3 shadow">🔗 View My Work</a>
+        <a href="pages/home.html#contact" class="btn btn-outline-dark btn-lg shadow">📩 Contact Me</a>
       </div>
     </div>
   </div>
@@ -100,7 +100,7 @@
 <script>
 function loadContact() {
     // Fetch home.html
-    fetch('home.html')
+    fetch('pages/home.html')
         .then(response => response.text())
         .then(data => {
             // Create a temporary DOM element to parse home.html
@@ -122,4 +122,5 @@ function loadContact() {
 </script>
 
 </body>
+
 </html> 
