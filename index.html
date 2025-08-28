@@ -97,30 +97,9 @@
 </div>
     
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-function loadContact() {
-    // Fetch home.html
-    fetch('pages/home.html')
-        .then(response => response.text())
-        .then(data => {
-            // Create a temporary DOM element to parse home.html
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = data;
 
-            // Select only the contact section by its ID
-            const contactSection = tempDiv.querySelector('#contact');
-
-            // Insert the contact section into the placeholder div
-            document.getElementById('contact-placeholder').innerHTML = '';
-            document.getElementById('contact-placeholder').appendChild(contactSection);
-
-            // Optionally, scroll to the loaded section
-            contactSection.scrollIntoView({ behavior: 'smooth' });
-        })
-        .catch(err => console.error('Error loading contact section:', err));
-}
-</script>
 
 </body>
 
 </html> 
+
