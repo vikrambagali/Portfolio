@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debugger Project</title>
+    <link rel="icon" href="public/imgs/salesforce.png">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+/* Common Reset */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
+  line-height: 1.6;
+}
+
+/* 🔹 Debugger Project Styles */
+#debugger {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-left: 6px solid #007bff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+#debugger h2 {
+  text-align: center;
+  background: #007bff;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+#debugger h4, 
+#debugger h5, 
+#debugger h6 {
+  margin-top: 20px;
+  color: #222;
+  border-left: 5px solid #007bff;
+  padding-left: 10px;
+}
+
+#debugger pre {
+  background: #272822;
+  color: #f8f8f2;
+  padding: 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 15px 0;
+}
+
+#debugger img {
+  border-radius: 8px;
+  margin: 10px 0;
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* 🔹 Discount Project Styles */
+#discount {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #fefefe;
+  border-top: 6px solid #28a745;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+#discount h2 {
+  text-align: center;
+  background: #28a745;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+#discount h4, 
+#discount h5, 
+#discount h6 {
+  margin-top: 20px;
+  color: #333;
+  border-bottom: 3px solid #28a745;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+#discount pre {
+  background: #f4f4f4;
+  color: #333;
+  padding: 12px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+#discount img {
+  border-radius: 12px;
+  margin: 12px 0;
+  max-width: 100%;
+  transition: transform 0.3s ease;
+}
+
+#discount img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+.image-row {
+  display: flex;
+  justify-content: space-between; /* spread them evenly */
+  align-items: center;            /* vertical alignment */
+  gap: 10px;                      /* space between images */
+  flex-wrap: wrap;                /* wrap on smaller screens */
+  margin: 15px 0;
+}
+
+.image-row img {
+  flex: 1 1 45%;   /* allow both images to shrink/grow but max 45% each */
+  max-width: 45%;
+  height: auto;    /* keep aspect ratio */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.project-detail {
+  display: none;
+}
+
+/* 🔹 Space Project Styles */
+#space {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-right: 6px solid #6f42c1; /* purple theme for space */
+  border-radius: 12px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+}
+
+#space h2 {
+  text-align: center;
+  background: #6f42c1; /* purple header */
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+#space h4, 
+#space h5, 
+#space h6 {
+  margin-top: 20px;
+  color: #222;
+  border-left: 5px solid #6f42c1;
+  padding-left: 10px;
+}
+
+#space pre {
+  background: #1e1e2f; /* dark starry bg */
+  color: #505061;      /* light bluish text */
+  padding: 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 15px 0;
+  font-family: "Courier New", monospace;
+}
+
+#space img {
+  border-radius: 12px;
+  margin: 12px 0;
+  max-width: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+
+#space img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 16px rgba(0,0,0,0.2);
+}
+
+/* Image row (for side-by-side placement) */
+#space .image-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 15px 0;
+}
+
+#space .image-row img {
+  flex: 1 1 48%;
+  max-width: 48%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.project-detail {
+  display: none; /* initially hidden until clicked */
+}
+/* 🔹 Recruitment Project Styles */
+#recruitment {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-left: 6px solid #ff9800; /* orange theme for recruitment */
+  border-radius: 12px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+}
+
+#recruitment h2 {
+  text-align: center;
+  background: #ff9800; /* orange header */
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+#recruitment h4, 
+#recruitment h5, 
+#recruitment h6 {
+  margin-top: 20px;
+  color: #222;
+  border-left: 5px solid #ff9800;
+  padding-left: 10px;
+}
+
+#recruitment pre {
+  background: #2b2b2b; /* dark console-like background */
+  color: #f1f1f1;
+  padding: 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 15px 0;
+  font-family: "Courier New", monospace;
+}
+
+#recruitment img {
+  border-radius: 12px;
+  margin: 12px 0;
+  max-width: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+
+#recruitment img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 16px rgba(0,0,0,0.2);
+}
+
+/* Image row for side-by-side placement */
+#recruitment .image-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 15px 0;
+}
+
+#recruitment .image-row img {
+  flex: 1 1 48%;
+  max-width: 48%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.project-detail {
+  display: none; /* initially hidden until clicked */
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 per row */
+  gap: 10px; /* spacing between images */
+  max-width: 500px; /* make it square-ish */
+  margin: auto;
+}
+
+.image-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* keeps images fitted inside square */
+  border-radius: 10px;
+}
+    </style>
+</head>
+<body>
+    <!-- Debugger Project Section -->
+<section class="project-detail py-5 bg-light" id="debugger">
+  <div class="container">
+    <!-- Title -->
+    <div class="text-center mb-5">
+      <h2 class="fw-bold text-dark">PROJECT</h2>
+      <h3 class="fw-semibold text-secondary">Salesforce Apex Debugger</h3>
+      <p class="text-muted">
+        Set up and use the Apex Replay Debugger in Salesforce to step through code, inspect variables, 
+        and quickly identify and fix bugs without manually parsing debug logs.
+      </p>
+    </div>
+
+    <!-- Step 1: Apex Replay Debugger -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title text-center text-primary">Step 1: Apex Replay Debugger</h4>
+        <hr>
+        <ul>
+          <li>Set breakpoints and checkpoints to step through code and inspect variable values.</li>
+          <li>Invoke Apex tests and download debug logs using Visual Studio Code.</li>
+          <li>Find and fix a bug using Apex Replay Debugger.</li>
+        </ul>
+        <p>
+          Apex Replay Debugger allows you to debug Apex code using VS Code by inspecting logs, viewing variables, 
+          and setting breakpoints without adding System.debug statements manually.
+        </p>
+        <div class="row text-center mb-3">
+          <div class="col-md-6 mb-3">
+            <img src="public/imgs/debugger/debugger1.webp" class="img-fluid rounded shadow" alt="Replay Debugger Setup">
+          </div>
+          <div class="col-md-6 mb-3">
+            <img src="public/imgs/debugger/debugger2.webp" class="img-fluid rounded shadow" alt="VS Code Debugger">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Visual Studio Code Setup -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title text-center text-primary">Step 2: Set Up Visual Studio Code</h4>
+        <hr>
+        <p>
+          Apex Replay Debugger is part of the Salesforce Extension Pack for VS Code. Install Salesforce CLI, VS Code, 
+          and the Salesforce Extension Pack to get started.
+        </p>
+        <ul>
+          <li>Install <strong>Salesforce CLI</strong> and <strong>Visual Studio Code</strong>.</li>
+          <li>Install Salesforce Extension Pack via VS Code Extensions panel.</li>
+        </ul>
+        <div class="text-center mb-3">
+          <img src="public/imgs/debugger/sfextention.webp" class="img-fluid rounded shadow w-50" alt="Salesforce Extension Pack">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Create Salesforce DX Project -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title text-center text-primary">Step 3: Create Salesforce DX Project</h4>
+        <hr>
+        <ul>
+          <li>Use VS Code to create a new Salesforce DX project (default template) named <code>debugger-project</code>.</li>
+          <li>Create Apex class <code>AccountService.cls</code> </li>
+        </ul>
+        <pre class="bg-light text-black p-2 rounded">
+public with sharing class AccountService {
+  public Account createAccount(String accountName, String accountNumber, String tickerSymbol) {
+    Account newAcct = new Account(
+      Name = accountName,
+      AccountNumber = accountNumber,
+      TickerSymbol = accountNumber
+    );
+    return newAcct;
+  }
+}
+        </pre>
+        <li>and test class <code>AccountServiceTest.cls</code>.</li>
+        <pre class="bg-light text-black  p-2 rounded">
+@IsTest
+private class AccountServiceTest {
+  @IsTest
+  static void should_create_account() {
+    String acctName = 'Salesforce';
+    String acctNumber = 'SFDC';
+    String tickerSymbol = 'CRM';
+    Test.startTest();
+      AccountService service = new AccountService();
+      Account newAcct = service.createAccount(acctName, acctNumber, tickerSymbol);
+      insert newAcct;
+    Test.stopTest();
+    List<Account> accts = [SELECT Id, Name, AccountNumber, TickerSymbol FROM Account WHERE Id = :newAcct.Id];
+    System.assertEquals(1, accts.size());
+  }
+}
+        </pre>
+          <li>Authorize an org using <code>sfdx authorize org</code> in VS Code.</li>
+
+        <div class="text-center mb-3">
+          <img src="public/imgs/debugger/playground.jpeg" class="img-fluid rounded shadow w-75" alt="Trailhead Playground">
+          <img src="public/imgs/debugger/authorize.webp" class="img-fluid rounded shadow w-50 mt-3" alt="Authorize Org">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4: Debugging -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title text-center text-primary">Step 4: Run Debugger & Fix Bugs</h4>
+        <hr>
+        <ul>
+          <li>Deploy source to org and run Apex tests.</li>
+          <li>Set breakpoints and checkpoints using <strong>Debug: Toggle Breakpoint</strong> and <strong>SFDX: Toggle Checkpoint</strong>.</li>
+          <li>Download debug logs and launch Apex Replay Debugger for the current file.</li>
+          <li>Inspect variables, identify bugs, and fix errors (e.g., incorrect ticker assignment).</li>
+          <li>Stop debug session and rerun tests to verify the fix.</li>
+        </ul>
+        <div class="text-center mb-3">
+          <img src="public/imgs/debugger/bugfound.webp" class="img-fluid rounded shadow w-50 mb-3" alt="Bug Found">
+          <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <img src="public/imgs/debugger/runsuccess.jpeg" class="img-fluid rounded shadow w-25" alt="Test Success">
+            <img src="public/imgs/debugger/Donedebug.jpeg" class="img-fluid rounded shadow w-25" alt="Debug Complete">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills Section -->
+    <div class="text-center mt-5">
+      <h4 class="fw-bold">Skills Used</h4>
+      <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
+        <span class="badge bg-dark">Apex</span>
+        <span class="badge bg-secondary">SFDX</span>
+        <span class="badge bg-primary">Salesforce CLI</span>
+        <span class="badge bg-info text-dark">VS Code</span>
+        <span class="badge bg-success">Extension Pack</span>
+        <span class="badge bg-warning text-dark">Unit Testing</span>
+        <span class="badge bg-danger">Log Analysis</span>
+        <span class="badge bg-dark">Deployment</span>
+        <span class="badge bg-secondary">Automation</span>
+        <span class="badge bg-primary">Problem Solving</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- Discount Approval Process Project Section -->
+<section class="project-detail py-5 bg-light" id="discount">
+  <div class="container">
+    <!-- Title -->
+    <div class="text-center mb-5">
+      <h2 class="fw-bold text-dark">PROJECT</h2>
+      <h3 class="fw-semibold text-secondary">Discount Approval Process</h3>
+      <p class="text-muted">
+        Automate discount approvals in Salesforce using the Opportunity object. 
+        This project defines approval steps, sets up managers and VP approvals, 
+        customizes approval page layouts, adds email notifications, and enforces record-level security.
+      </p>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title text-center text-primary">Step 1: Prepare Your Org</h4>
+        <hr>
+        <p>
+          Make it easy for sales reps to get the approvals they need for discount offers.
+        </p>
+        <ul>
+          <li>Create a new Trailhead Playground.</li>
+          <li>Add users: <strong>Allison Wheeler (VP, North American Sales)</strong> and <strong>Courtney Brown (Manager)</strong>.</li>
+          <li>Create a role hierarchy: Manager under VP, North American Sales.</li>
+          <li>Add custom fields on <strong>Opportunity</strong>:
+            <ul>
+              <li>Discount Percentage (Percent, 2 decimals).</li>
+              <li>Approval Status (Picklist: Pending, Approved, Not Approved).</li>
+            </ul>
+          </li>
+          <li>Create email templates inside <em>Discount Request Responses</em>:
+            <ul>
+              <li>Discount Approved → Notifies user of approval.</li>
+              <li>Discount Rejected → Notifies user of rejection.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="text-center">
+          <img src="public/imgs/discount/discount1.webp" class="img-fluid rounded shadow w-50 mb-3" alt="Prepare Org">
+          <img src="public/imgs/discount/discount.webp" class="img-fluid rounded shadow w-50" alt="Discount Setup">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title text-center text-primary">Step 2: Create an Approval Process</h4>
+        <hr>
+        <p>
+          Set up an approval process on the Opportunity object so that discounts greater than 0% require manager approval.
+        </p>
+        <ul>
+          <li>Go to <strong>Setup → Approval Processes</strong>.</li>
+          <li>Process Name: <em>Discount Approval Process</em>.</li>
+          <li>Entry Criteria: <em>Opportunity Discount % > 0</em>.</li>
+          <li>Approver: Manager of Opportunity Owner.</li>
+          <li>Record Editability: Admins only during approval.</li>
+          <li>Approval Page: Show fields → Opportunity Name, Owner, Amount, Discount %.</li>
+          <li>Submitter: Opportunity Owner only.</li>
+        </ul>
+        <div class="text-center">
+          <img src="public/imgs/discount/discount2.jpeg" class="img-fluid rounded shadow w-50 mb-3" alt="Approval Process">
+          <img src="public/imgs/discount/discount3.jpeg" class="img-fluid rounded shadow w-50" alt="Approval Criteria">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title text-center text-primary">Step 3: Define Submission & Approval Steps</h4>
+        <hr>
+        <p>Configure submission actions and multi-step approvals.</p>
+        <ul>
+          <li><strong>Initial Action:</strong> Update Approval Status → Pending.</li>
+          <li><strong>Step 1 (Manager Approval):</strong> If Discount % > 15, auto-assign Manager.</li>
+          <li><strong>Step 2 (VP Approval):</strong> If Discount % > 40, assign VP (Allison Wheeler).</li>
+        </ul>
+        <div class="text-center">
+          <img src="public/imgs/discount/discount5.jpeg" class="img-fluid rounded shadow w-50 mb-3" alt="Manager Approval">
+          <img src="public/imgs/discount/discount4.jpeg" class="img-fluid rounded shadow w-50" alt="VP Approval">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title text-center text-primary">Step 4: Final Approval & Rejection Actions</h4>
+        <hr>
+        <ul>
+          <li><strong>Approval:</strong> Set Status = Approved, notify Opportunity Owner, unlock record.</li>
+          <li><strong>Rejection:</strong> Set Status = Not Approved, clear Discount %, send rejection email.</li>
+        </ul>
+        <div class="text-center">
+          <img src="public/imgs/discount/discount7.jpeg" class="img-fluid rounded shadow w-50 mb-3" alt="Approval Actions">
+          <img src="public/imgs/discount/discount6.jpeg" class="img-fluid rounded shadow w-50" alt="Rejection Actions">
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills Section -->
+    <div class="text-center mt-5">
+      <h4 class="fw-bold">Skills Used</h4>
+      <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
+        <span class="badge bg-dark">Approval Processes</span>
+        <span class="badge bg-primary">Automation</span>
+        <span class="badge bg-success">Workflow Rules</span>
+        <span class="badge bg-secondary">Opportunity Management</span>
+        <span class="badge bg-info text-dark">Custom Fields</span>
+        <span class="badge bg-warning text-dark">Email Templates</span>
+        <span class="badge bg-danger">Role Hierarchy</span>
+        <span class="badge bg-dark">Page Layouts</span>
+        <span class="badge bg-primary">Record Security</span>
+        <span class="badge bg-success">Field Updates</span>
+      </div>
+    </div>
+  </div>
+</section>
+    <!-- Space Station Project Section -->
+<section class="project-detail py-5 bg-light" id="space">
+  <div class="container">
+    <!-- Title -->
+    <div class="text-center mb-5">
+      <h2 class="fw-bold text-dark">PROJECT</h2>
+      <h3 class="fw-semibold text-secondary">Space Station App</h3>
+      <p class="text-muted">
+        Build a no-code project management app in Salesforce to coordinate the construction of a galactic Space Station.
+        You'll model work with custom objects, automate approvals, track milestones on dashboards, and keep crews aligned—
+        all without writing a single line of code.
+      </p>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title text-center text-primary">Step 1: Project Setup & Goals</h4>
+        <hr>
+        <p>
+          Build a no-code Salesforce app to manage the Space Station project. The app will help Mission Control and teams 
+          coordinate modules, work orders, crew, and resources efficiently. 
+        </p>
+        <ul>
+          <li><strong>Goal:</strong> Centralize project management for Space Station construction.</li>
+          <li><strong>Stakeholders:</strong> Mission Control, Module Teams, Logistics, Finance.</li>
+          <li><strong>Outcome:</strong> Track modules, work orders, crew assignments, resources, and approvals.</li>
+        </ul>
+        <div class="text-center">
+          <img src="public/imgs/Space/space.webp" alt="Project Setup" class="img-fluid rounded shadow w-75">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title text-center text-primary">Step 2: Build the Object Model</h4>
+        <hr>
+        <p>
+          Salesforce uses <strong>objects</strong> instead of spreadsheets to store and organize data.  
+          For the Space Station app:
+        </p>
+        <ul>
+          <li><strong>Space Station:</strong> Tracks project status, resources, and supplies.</li>
+          <li><strong>Resource:</strong> Tracks crew roles, quantity, and utilization.</li>
+          <li><strong>Supply:</strong> Tracks items, costs, and links them to the station.</li>
+        </ul>
+        <div class="text-center mb-3">
+          <img src="public/imgs/Space/spaceErd.webp" alt="ERD" class="img-fluid rounded shadow w-50">
+        </div>
+        <div class="row text-center">
+          <div class="col-md-6 mb-3">
+            <p>Create <strong>custom objects</strong> to manage everything from stations to crew and supplies.</p>
+            <img src="public/imgs/Space/custom.bmp" class="img-fluid rounded shadow" alt="Custom Object">
+          </div>
+          <div class="col-md-6 mb-3">
+            <p>Add <strong>fields</strong> like Project Status, Shield Status, Quantity, Utilization, and Costs.</p>
+            <img src="public/imgs/Space/field.jpeg" class="img-fluid rounded shadow" alt="Custom Fields">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title text-center text-primary">Step 3: Modify the User Experience</h4>
+        <hr>
+        <p>
+          Customize page layouts to improve usability. Rearrange fields like 
+          <em>Project Status</em> and <em>Shield Status</em> for better visibility.
+        </p>
+        <div class="row text-center">
+          <div class="col-md-6 mb-3">
+            <img src="public/imgs/Space/default.jpeg" class="img-fluid rounded shadow" alt="Default Layout">
+          </div>
+          <div class="col-md-6 mb-3">
+            <img src="public/imgs/Space/customlayout.jpeg" class="img-fluid rounded shadow" alt="Custom Layout">
+          </div>
+        </div>
+        <p>
+          Enhance related lists with fields like <strong>Quantity</strong>, 
+          <strong>Utilization</strong>, <strong>Unit Cost</strong>, and <strong>Total Cost</strong>.
+        </p>
+        <div class="row text-center">
+          <div class="col-md-6 mb-3">
+            <img src="public/imgs/Space/beforeRelated.png" class="img-fluid rounded shadow" alt="Before">
+          </div>
+          <div class="col-md-6 mb-3">
+            <img src="public/imgs/Space/afterRelated.jpeg" class="img-fluid rounded shadow" alt="After">
+          </div>
+        </div>
+        <div class="text-center">
+          <img src="public/imgs/Space/rollup.webp" alt="Roll-Up Summary" class="img-fluid rounded shadow w-50">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title text-center text-primary">Step 4: Add Business Logic</h4>
+        <hr>
+        <h6>1. Validation Rule</h6>
+        <p>
+          Ensure <strong>Exhaust Port Inspectors</strong> always work at least 150% utilization:
+        </p>
+        <pre class="bg-light p-2 rounded">
+AND(Name = "Exhaust Port Inspector", Utilization__c < 1.5)
+        </pre>
+        <div class="text-center mb-3">
+          <img src="public/imgs/Space/validation.jpeg" alt="Validation Rule" class="img-fluid rounded shadow w-50">
+        </div>
+
+        <h6>2. Automate with Flow Builder</h6>
+        <ul>
+          <li><strong>Trigger:</strong> When Shield Status = Fully Operational</li>
+          <li><strong>Action:</strong> Update Project Status = Complete</li>
+        </ul>
+        <div class="row text-center">
+          <div class="col-md-6 mb-3">
+            <img src="public/imgs/Space/trigger.webp" class="img-fluid rounded shadow" alt="Flow Trigger">
+          </div>
+          <div class="col-md-6 mb-3">
+            <img src="public/imgs/Space/action.webp" class="img-fluid rounded shadow" alt="Flow Action">
+          </div>
+        </div>
+
+        <h6>3. Post to Chatter</h6>
+        <blockquote class="blockquote">
+          {!$Record.Name} is complete! Now witness the comfort of being protected by the best shield in the galaxy!
+        </blockquote>
+        <div class="text-center">
+          <img src="public/imgs/Space/chatter.webp" alt="Chatter Post" class="img-fluid rounded shadow w-50">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title text-center text-primary">Step 5: Reports & Dashboards</h4>
+        <hr>
+        <h6>Create Reports</h6>
+        <ul>
+          <li>App Launcher → Space Station Construction → Reports → New Report</li>
+          <li>Report Type: Space Station with Supplies</li>
+          <li>Columns: Quantity, Unit Cost, Total Cost</li>
+          <li>Group by: Space Station Name</li>
+          <li>Save as <strong>Supplies</strong></li>
+        </ul>
+        <img src="public/imgs/Space/reportcreate.webp" class="img-fluid rounded shadow w-50 float-end mb-3" alt="Report">
+
+        <h6>Create Dashboard</h6>
+        <ul>
+          <li>Dashboards → New Dashboard → Name: <strong>Construction</strong></li>
+          <li>Add Widget → Supplies Report → Vertical Bar Chart</li>
+          <li>Save & Done ✅</li>
+        </ul>
+        <img src="public/imgs/Space/dashboard.webp" class="img-fluid rounded shadow w-50 mb-3" alt="Dashboard">
+
+        <div class="alert alert-success d-flex align-items-center mt-4">
+          <img src="public/imgs/Space/complete.jpeg" alt="Completed" class="img-fluid rounded me-3" style="width:80px;">
+          <p class="mb-0">
+            🎉 Completed the Space Station project with custom objects, automation, validation rules, reports, and dashboards.  
+            Everything is ready for launch 🚀
+          </p>
+        </div>
+      </div>
+      <div class="container text-center mt-4 pb-4">
+  <h4 class="fw-bold mb-3">Project Skills</h4>
+  <div class="d-flex flex-wrap justify-content-center gap-2">
+    <span class="badge bg-primary">Approval Process</span>
+    <span class="badge bg-success">Workflow Automation</span>
+    <span class="badge bg-dark">Opportunity Object</span>
+    <span class="badge bg-warning text-dark">Custom Fields</span>
+    <span class="badge bg-info text-dark">Role Hierarchy</span>
+    <span class="badge bg-danger">Email Templates</span>
+    <span class="badge bg-secondary">Process Builder</span>
+    <span class="badge bg-primary">Record Security</span>
+    <span class="badge bg-success">Field Updates</span>
+    <span class="badge bg-dark">Approval Steps</span>
+    <span class="badge bg-warning text-dark">Automation Rules</span>
+    <span class="badge bg-danger">Record Locking</span>
+    <span class="badge bg-info text-dark">Manager Approval</span>
+    <span class="badge bg-secondary">VP Approval</span>
+    <span class="badge bg-primary">Email Alerts</span>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="project-detail py-5 bg-light" id="recruitment">
+  <div class="container">
+    <!-- Title -->
+    <div class="text-center mb-5">
+      <h2 class="fw-bold text-dark">PROJECT</h2>
+      <h3 class="fw-semibold text-secondary">Recruitment App</h3>
+      <p class="text-muted">
+        Build a no-code Recruitment App in Salesforce to manage hiring, candidates, positions, and job postings.  
+        You'll model relationships with custom objects, customize the UI for recruiters, automate business processes, 
+        improve data quality, and secure sensitive information—all without writing code.
+      </p>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title text-center text-primary">Step 1: Build the Data Model</h4>
+        <hr>
+        <p>Create custom objects and relationships to track every part of the recruitment process.</p>
+        <ul>
+          <li><strong>Position:</strong> Job openings with fields like Title, Status, Location.</li>
+          <li><strong>Candidate:</strong> Applicants with Resume, Email, and Experience fields.</li>
+          <li><strong>Job Posting Site:</strong> Tracks websites where jobs are posted.</li>
+          <li><strong>Review:</strong> Feedback and ratings about candidates.</li>
+          <li><strong>Relationships:</strong> 
+            <ul>
+              <li>Position ↔ Candidate (Lookup)</li>
+              <li>Candidate ↔ Review (Master-Detail)</li>
+              <li>Position ↔ Job Posting Site (Junction Object)</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="image-grid text-center">
+          <img src="public/imgs/recruitment/position.jpeg" alt="Recruitment ERD" class="img-fluid rounded shadow w-75">
+          <img src="public/imgs/recruitment/candidate.jpeg" alt="Recruitment ERD" class="img-fluid rounded shadow w-75">
+          <img src="public/imgs/recruitment/all.jpeg" alt="Recruitment ERD" class="img-fluid rounded shadow w-75">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title text-center text-primary">Step 2: Customize the User Interface</h4>
+        <hr>
+        <p>
+          Enhance recruiter productivity by customizing layouts, record pages, and navigation.
+        </p>
+        <ul>
+          <li>Rearrange fields on <strong>Candidate</strong> and <strong>Position</strong> page layouts.</li>
+          <li>Create <strong>Compact Layouts</strong> to highlight key info like Candidate Name, Email, and Position Title.</li>
+          <li>Add <strong>Quick Actions</strong> to create Reviews directly from a Candidate record.</li>
+          <li>Enable <strong>Chatter Feed Tracking</strong> for collaboration on Candidates and Positions.</li>
+        </ul>
+        <div class="row text-center">
+          <div class="image-grid col-md-6 mb-3">
+            <img src="public/imgs/recruitment/canlayout.jpeg" class="img-fluid rounded shadow"width="100%" alt="Before Layout">
+            <img src="public/imgs/recruitment/cancompact.jpeg" class="img-fluid rounded shadow" alt="Before Layout">
+            <img src="public/imgs/recruitment/posipage.jpeg" class="img-fluid rounded shadow" alt="Before Layout">
+            <img src="public/imgs/recruitment/posicompact.jpeg" class="img-fluid rounded shadow" alt="Before Layout">
+          </div>
+          <div class="image-grid col-md-6 mb-3">
+            <img src="public/imgs/recruitment/quickaction.jpeg" class="img-fluid rounded shadow" alt="After Layout">
+            <img src="public/imgs/recruitment/chattter.jpeg" class="img-fluid rounded shadow" alt="After Layout">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title text-center text-primary">Step 3: Improve Data Quality</h4>
+        <hr>
+        <ul>
+          <li><strong>Validation Rules:</strong> Ensure Salary > 0, Email format is valid, and Position Close Date > Today.</li>
+          <li><strong>Formula Fields:</strong> Candidate Full Name, Position Age in days.</li>
+          <li><strong>Roll-Up Summary:</strong> Total Reviews per Candidate, Average Rating.</li>
+          <li><strong>Chatter Tracking:</strong> Notify recruiters when Candidate Status changes.</li>
+        </ul>
+        <div class="text-center">
+          <img src="public/imgs/Space/validation.jpeg" class="img-fluid rounded shadow w-50" alt="Validation Rule">
+          <img src="public/imgs/recruitment/status.jpeg" class="img-fluid rounded shadow w-50" alt="Validation Rule">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title text-center text-primary">Step 4: Automate Business Processes</h4>
+        <hr>
+        <h6>1. Workflow Rules</h6>
+        <p>Send automatic email alerts when a Candidate's status = <em>Recommended</em>.</p>
+
+        <h6>2. Flow Builder</h6>
+        <ul>
+          <li><strong>Trigger:</strong> When a Candidate is marked "Hired"</li>
+          <li><strong>Action:</strong> Update Position Status to "Closed" and notify Hiring Manager</li>
+        </ul>
+
+        <h6>3. Approval Process</h6>
+        <p>Route Position approval requests from Recruiter → Recruiter Manager → VP of HR.</p>
+
+        <div class="row text-center">
+          <div class="col-md-6 mb-3">
+            <img src="public/imgs/recruitment/email.jpeg" class="img-fluid rounded shadow" alt="Flow">
+          </div>
+          <div class="col-md-6 mb-3">
+            <img src="public/imgs/recruitment/posclosed.jpeg" class="img-fluid rounded shadow" alt="Approval Process">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title text-center text-primary">Step 5: Keep Data Secure</h4>
+        <hr>
+        <ul>
+          <li><strong>Roles:</strong> VP of HR → Recruiter Manager → Recruiters.</li>
+          <li><strong>Profiles:</strong> Recruiter profile with limited delete access.</li>
+          <li><strong>Field-Level Security:</strong> Restrict Salary & SSN fields to HR only.</li>
+          <li><strong>Sharing Rules:</strong> Share Candidates by Position owner with Recruiters.</li>
+          <li><strong>Permission Sets:</strong> "Interview Access" for specific recruiters.</li>
+        </ul>
+        <div class="image-grid text-center">
+          <img src="public/imgs/recruitment/permiss.jpeg" alt="Security Settings" class="img-fluid rounded shadow w-75">
+          <img src="public/imgs/recruitment/roles.jpeg" alt="Security Settings" class="img-fluid rounded shadow w-75">
+          <img src="public/imgs/recruitment/sharing.jpeg" alt="Security Settings" class="img-fluid rounded shadow w-75">
+          <img src="public/imgs/recruitment/user.jpeg" alt="Security Settings" class="img-fluid rounded shadow w-75">
+        </div>
+        <div class="alert alert-success d-flex align-items-center mt-4">
+          <img src="public/imgs/recruitment/complete.jpeg" alt="Completed" class="img-fluid rounded me-3" style="width:200px;">
+          <p class="mb-0">
+            🎉 Recruitment App complete with Data Model, UI customization, Data Quality, Automation, and Security.  
+            The hiring process is now smarter, faster, and more secure 🚀
+          </p>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div class="container text-center mt-4 pb-4">
+        <h4 class="fw-bold mb-3">Project Skills</h4>
+        <div class="d-flex flex-wrap justify-content-center gap-2">
+          <span class="badge bg-primary">Custom Objects</span>
+          <span class="badge bg-success">Page Layouts</span>
+          <span class="badge bg-dark">Compact Layouts</span>
+          <span class="badge bg-warning text-dark">Quick Actions</span>
+          <span class="badge bg-info text-dark">Validation Rules</span>
+          <span class="badge bg-danger">Roll-Up Summaries</span>
+          <span class="badge bg-secondary">Chatter Tracking</span>
+          <span class="badge bg-primary">Flows</span>
+          <span class="badge bg-success">Approval Process</span>
+          <span class="badge bg-dark">Workflow Rules</span>
+          <span class="badge bg-warning text-dark">Roles & Profiles</span>
+          <span class="badge bg-danger">Sharing Rules</span>
+          <span class="badge bg-info text-dark">Permission Sets</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+  // Get project name from URL (like ?project=discount)
+  const params = new URLSearchParams(window.location.search);
+  const project = params.get("project");
+
+  // Hide all sections
+  document.querySelectorAll(".project-detail").forEach(div => div.style.display = "none");
+
+  // Show only the requested one
+  if (project) {
+    const section = document.getElementById(project);
+    if (section) section.style.display = "block";
+  }
+</script>
+
+     
+    </body>
+</html>
