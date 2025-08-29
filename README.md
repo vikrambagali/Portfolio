@@ -63,9 +63,9 @@ Portfolio/
 
 ## ⚡ How to Run Locally
 
-# Clone the repository
+### Clone the repository
 ```bash
 git clone https://github.com/vikrambagali/Portfolio.git
 ```
-# Open index.html in your browser
+### Open index.html in your browser
 
